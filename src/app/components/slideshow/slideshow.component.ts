@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from '../../interfaces/cartelera-response';
-import SwiperCore, {Virtual} from 'swiper/core';
+import SwiperCore, {Virtual, Navigation, A11y, Scrollbar} from 'swiper/core';
 
-SwiperCore.use([Virtual]);
+SwiperCore.use([Virtual, Navigation, A11y, Scrollbar]);
 
 @Component({
   selector: 'app-slideshow',
@@ -10,12 +10,11 @@ SwiperCore.use([Virtual]);
   template: `
   <swiper
     [slidesPerView]="1"
-    [spaceBetween]="50"
-    (swiper)="onSwiper($event)"
+    [spaceBetween]="0"
     [navigation]="true"
-    [pagination]="{ clickable: true }"
     [scrollbar]="{ draggable: true }"
     [virtual]="true"
+    
   >
 
   <ng-container *ngFor="let slide of movies; index as i">
@@ -24,8 +23,10 @@ SwiperCore.use([Virtual]);
         <div class="movie-description" [ngStyle]="{
         'background-image': 'url(https://image.tmdb.org/t/p/w500/' + slide.backdrop_path + ')'
       }">
+        <div class="box">
           <h3> {{slide.title}} </h3>
-          <p> {{slide.overview | slice:0:130}}... </p>
+          <p> {{slide.overview | slice:0:170}}... </p>
+        </div>
         </div>
       </ng-template>
     </ng-container>
@@ -43,11 +44,7 @@ export class SlideshowComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.movies);
   }
 
-  onSwiper(swiper) {
-    console.log(swiper);
-  }
 
 }
