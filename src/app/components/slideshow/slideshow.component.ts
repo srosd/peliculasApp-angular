@@ -25,7 +25,7 @@ SwiperCore.use([Virtual, Navigation, A11y, Scrollbar]);
       }">
         <div class="box">
           <h3> {{slide.title}} </h3>
-          <p> {{slide.overview | slice:0:170}}... </p>
+          <p> {{slide.overview | slice:0:250}}... </p>
         </div>
         </div>
       </ng-template>
